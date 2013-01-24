@@ -1,0 +1,29 @@
+Imports EdmLib
+Imports System.Data
+Public Class Class1
+    Implements IEdmAddIn5
+
+    Public Sub GetAddInInfo(ByRef poInfo As EdmLib.EdmAddInInfo, ByVal poVault As EdmLib.IEdmVault5, ByVal poCmdMgr As EdmLib.IEdmCmdMgr5) Implements EdmLib.IEdmAddIn5.GetAddInInfo
+        'Just some information for the Administrate Add-ins dialog box 
+        poInfo.mbsAddInName = "ERP物料信息导出"
+        poInfo.mbsCompany = "Dinovor"
+        poInfo.mbsDescription = "导出物料基本信息及Bom到ERP"
+        poInfo.mlAddInVersion = 1
+        poInfo.mlRequiredVersionMajor = 5
+        poInfo.mlRequiredVersionMinor = 2
+
+        poCmdMgr.AddCmd(1000, "Dinovor物料导出", EdmMenuFlags.EdmMenu_Nothing)
+    End Sub
+
+    Public Sub OnCmd(ByRef poCmd As EdmLib.EdmCmd, ByRef ppoData As System.Array) Implements EdmLib.IEdmAddIn5.OnCmd
+
+        Dim ConfigForm As Form1
+        ConfigForm = New Form1(poCmd, ppoData)
+        ConfigForm.Show()
+
+    End Sub
+
+
+
+
+End Class
